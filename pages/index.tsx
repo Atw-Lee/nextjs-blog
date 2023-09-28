@@ -2,10 +2,11 @@
  * @Author: atwlee
  * @Date: 2023-09-08 00:47:48
  * @LastEditors: atwlee
- * @LastEditTime: 2023-09-15 15:31:40
+ * @LastEditTime: 2023-09-28 14:45:56
  * @Description:
- * @FilePath: /nextjs-blog/pages/index.js
+ * @FilePath: /nextjs-blog/pages/index.tsx
  */
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
@@ -13,14 +14,22 @@ import Date from "../components/date";
 import { getSortedPostsData } from "../lib/posts";
 import utilStyles from "../styles/utils.module.css";
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: { allPostsData },
   };
 };
 
-export default function Home({ allPostsData }) {
+export default function Home({
+  allPostsData,
+}: {
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
+}) {
   return (
     <Layout home>
       <Head>

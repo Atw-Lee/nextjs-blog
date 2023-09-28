@@ -2,9 +2,9 @@
  * @Author: atwlee
  * @Date: 2023-09-13 14:37:13
  * @LastEditors: atwlee
- * @LastEditTime: 2023-09-13 15:24:30
+ * @LastEditTime: 2023-09-28 14:45:18
  * @Description:
- * @FilePath: /nextjs-blog/components/layout.js
+ * @FilePath: /nextjs-blog/components/layout.tsx
  */
 import Head from "next/head";
 import Image from "next/image";
@@ -15,7 +15,13 @@ import Link from "next/link";
 const name = "ATW Lee";
 export const siteTitle = "Next.js Sample Website";
 
-export default function Layout({ children, home, ...rest }) {
+export default function Layout({
+  children,
+  home,
+}: {
+  children: React.ReactNode;
+  home?: boolean;
+}) {
   return (
     <div className={styles.container}>
       <Head>

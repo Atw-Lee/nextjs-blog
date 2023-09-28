@@ -2,9 +2,9 @@
  * @Author: atwlee
  * @Date: 2023-09-15 11:11:39
  * @LastEditors: atwlee
- * @LastEditTime: 2023-09-15 14:54:39
+ * @LastEditTime: 2023-09-28 14:46:56
  * @Description:
- * @FilePath: /nextjs-blog/lib/posts.js
+ * @FilePath: /nextjs-blog/lib/posts.ts
  */
 import fs from "fs";
 import path from "path";
@@ -31,7 +31,7 @@ export function getSortedPostsData() {
     // Combine the data with the id
     return {
       id,
-      ...matterResult.data,
+      ...(matterResult.data as { date: string; title: string }),
     };
   });
   // Sort posts by date
@@ -56,7 +56,7 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id) {
+export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -72,6 +72,6 @@ export async function getPostData(id) {
   return {
     id,
     contentHtml,
-    ...matterResult.data,
+    ...(matterResult.data as { date: string; title: string }),
   };
 }
